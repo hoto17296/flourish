@@ -1,9 +1,10 @@
-const express = require('express');
-const mysql = require('mysql');
+const app = require('express')();
+const http = require('http').Server(app);
 
-const app = express();
+const io = require('socket.io')(http);
+app.set('io', io);
 
-const db = mysql.createPool( process.env.MYSQL_URL || 'mysql://root@localhost/flourish' );
+const db = require('mysql').createPool( process.env.MYSQL_URL || 'mysql://root@localhost/flourish' );
 app.set('db', db);
 
-module.exports = app;
+module.exports = http;
