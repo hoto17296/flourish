@@ -14,7 +14,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "mysql": "^2.13.0"
   },
   "devDependencies": {
     "foreman": "^2.0.0",
