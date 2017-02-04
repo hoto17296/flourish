@@ -1,1 +1,1 @@
-web: echo "require('.').listen( process.env.PORT )" | node
+web: echo "require('.').start()" | node

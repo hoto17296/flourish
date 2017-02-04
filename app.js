@@ -1,6 +1,9 @@
 const app = require('express')();
 const http = require('http').Server(app);
 
+const isProd = process.env.NODE_ENV === 'production';
+app.set('isProd', isProd);
+
 const io = require('socket.io')(http);
 app.set('io', io);
 
@@ -19,5 +22,14 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true },
 }));
+
+http.start = function(port) {
+  port = port || process.env.PORT;
+  http.listen(port, () => {
+    if ( isProd ) return;
+    const url = 'http://localhost:' + port;
+    console.log('flourish server starting on ' + url);
+  });
+}
 
 module.exports = http;
