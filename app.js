@@ -7,10 +7,10 @@ app.set('isProd', isProd);
 const io = require('socket.io')(http);
 app.set('io', io);
 
-const db = require('mysql').createPool( process.env.MYSQL_URL || 'mysql://root@localhost/flourish' );
+const db = require('./store/mysql');
 app.set('db', db);
 
-const redis = require('redis').createClient( process.env.REDIS_URL );
+const redis = require('./store/redis');
 app.set('redis', redis);
 
 const session = require('express-session');
