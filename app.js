@@ -7,10 +7,10 @@ app.set('isProd', isProd);
 const io = require('socket.io')(http);
 app.set('io', io);
 
-const db = require('./store/mysql');
+const db = require('./stores/mysql');
 app.set('db', db);
 
-const redis = require('./store/redis');
+const redis = require('./stores/redis');
 app.set('redis', redis);
 
 const session = require('express-session');
@@ -20,8 +20,17 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'flourish',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: { secure: false },
 }));
+
+app.set('view engine', 'ejs');
+
+const passport = require('./lib/auth').initPassport();
+app.use( passport.initialize() );
+app.use( passport.session() );
+
+app.use('/', require('./routes'));
+app.use('/', require('./routes/auth'));
 
 http.start = function(port) {
   port = port || process.env.PORT;
