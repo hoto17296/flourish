@@ -17,10 +17,18 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 app.use(session({
   store: new RedisStore({ client: redis }),
+  key: 'session_id',
   secret: process.env.SESSION_SECRET || 'flourish',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
+}));
+
+io.use(require('passport.socketio').authorize({
+  cookieParser: require('cookie-parser'),
+  key: 'session_id',
+  secret: process.env.SESSION_SECRET || 'flourish',
+  store: RedisStore,
 }));
 
 app.set('view engine', 'ejs');
