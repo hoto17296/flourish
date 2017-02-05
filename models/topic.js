@@ -1,7 +1,6 @@
 const mysql = require('../stores/mysql');
-const Topic = require('./topic');
 
-class Event {
+class Topic {
   constructor(params) {
     Object.assign(this, params);
   }
@@ -23,11 +22,17 @@ class Event {
       mysql.query(sql, [ this._table.name, key, val ], (err, result) => {
         if (err) return reject(err);
         if ( result.length === 0 ) return resolve(null);
-        const event = new this( result[0] );
-        Topic.findAllBy('event_id', event.id).then((topics) => {
-          event.topics = topics;
-          resolve(event);
-        }).catch(reject);
+        resolve( new this( result[0] ) );
+      });
+    });
+  }
+
+  static findAllBy(key, val) {
+    return new Promise((resolve, reject) => {
+      const sql = 'select * from ?? where ?? = ?;';
+      mysql.query(sql, [ this._table.name, key, val ], (err, result) => {
+        if (err) return reject(err);
+        resolve( result.map((item) => new this(item)) );
       });
     });
   }
@@ -59,9 +64,9 @@ class Event {
   }
 }
 
-Event._table = {
-  name: 'events',
+Topic._table = {
+  name: 'topics',
   pk: 'id',
 }
 
-module.exports = Event;
+module.exports = Topic;

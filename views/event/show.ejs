@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head'); -%>
+  </head>
+  <body>
+    <%- include('../partial/body_header'); -%>
+
+    <div class="container">
+      <div class="page-header">
+        <h2>
+          <%= event.title %>
+          <%= title %>
+          （<%= moment(event.convened_at).format('YYYY年 M月D日') %>）
+        </h2>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 30px"></th>
+            <th style="width: 150px">プレゼンテーター</th>
+            <th style="width: 100px">時間</th>
+            <th>タイトル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for ( let i = 0; i < event.topics.length; i++ ) { %>
+            <% let topic = event.topics[i]; %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= topic.presentator %></td>
+              <td><%= topic.time %></td>
+              <td>
+                <a href="/topic/<%= topic.id %>">
+                  <%= topic.title ? topic.title : 'タイトル未定' %>
+                </a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <h3>イベント管理</h3>
+      <div>
+        <a href="/event/<%= event.id %>/update" class="btn btn-warning"><i class="fa fa-pencil"></i> イベント編集</a>
+        <a href="/event/<%= event.id %>/evaluations" class="btn btn-info"><i class="fa fa-bar-chart"></i> 集計結果</a>
+      </div>
+    </div>
+  </body>
+</html>
