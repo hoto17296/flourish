@@ -40,7 +40,7 @@ app.use( passport.session() );
 app.use('/', require('./routes'));
 app.use('/', require('./routes/auth'));
 
-app.locals.sitename = 'flourish';
+app.locals.sitename = process.env.SITENAME || 'flourish';
 app.locals.moment = require('moment');
 
 http.start = function(port) {
