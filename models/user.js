@@ -1,25 +1,7 @@
+const ORM = require('../lib/orm');
 const mysql = require('../stores/mysql');
 
-class User {
-  constructor(params) {
-    Object.assign(this, params);
-  }
-
-  static find(pk) {
-    return this.findBy(this._table.pk, pk);
-  }
-
-  static findBy(key, val) {
-    return new Promise((resolve, reject) => {
-      const sql = 'select * from ?? where ?? = ?;';
-      mysql.query(sql, [ this._table.name, key, val ], (err, result) => {
-        if (err) return reject(err);
-        if ( result.length === 0 ) return resolve(null);
-        resolve( new this( result[0] ) );
-      });
-    });
-  }
-
+class User extends ORM {
   static create(params) {
     return new Promise((resolve, reject) => {
       mysql.getConnection((err, conn) => {
