@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head'); -%>
+  </head>
+  <body>
+    <%- include('../partial/body_header'); -%>
+
+    <div class="container">
+      <div class="page-header">
+        <h2><%= title %></h2>
+      </div>
+      <div style="width: 600px">
+        <form action="/event/new" method="post">
+          <div class="form-group">
+            <label for="title">イベント名</label>
+            <input type="text" class="form-control" name="title" placeholder="イベント名" autofocus required>
+          </div>
+          <div class="form-group">
+            <label for="convened">開催日時</label>
+            <input type="text" id="datepicker" class="form-control" name="convened" placeholder="開催日時" required>
+          </div>
+          <hr />
+          <div class="form-group">
+            <% for ( let i = 0; i < 30; i++ ) { %>
+              <label for="presentater<%= i %>">トピック <%= i + 1  %></label>
+              <div class="form-inline">
+                <input type="text" class="form-control" name="presentator<%= i %>" placeholder="発表者" style="width: 100px" <% if (i == 0) { %>required<% } %> >
+                <input type="text" class="form-control" name="title<%= i %>" placeholder="タイトル" style="width: 445px">
+                <input type="text" class="form-control" name="time<%= i %>" placeholder="分" style="width: 45px">
+                <input type="text" class="form-control" name="reference_url<%= i %>" placeholder="参考URL" style="width: 600px; margin-top: 5px">
+              </div>
+            <% } %>
+          </div>
+          <input type="submit" class="btn btn-sm btn-success" value="送信">
+        </form>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(function(){
+        $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+      });
+    </script>
+  </body>
+</html>

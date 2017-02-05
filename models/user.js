@@ -1,5 +1,4 @@
 const ORM = require('../lib/orm');
-const mysql = require('../stores/mysql');
 
 class User extends ORM {
 }
