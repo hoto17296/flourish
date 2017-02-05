@@ -13,6 +13,10 @@ app.set('db', db);
 const redis = require('./stores/redis');
 app.set('redis', redis);
 
+const bodyParser = require('body-parser');
+app.use( bodyParser.json() );
+app.use( bodyParser.urlencoded({ extended: false }) );
+
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 app.use(session({
