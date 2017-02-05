@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head'); -%>
+  </head>
+  <body>
+    <%- include('../partial/body_header'); -%>
+    <div class="container">
+      <div class="page-header"><h2>本日のイベント</h2></div>
+      <div class="well" style="width: 100%">
+        <%
+          const today = moment().format('YYYY-MM-DD');
+          todays_events = events.filter((event) => event.convened_at === today);
+        %>
+        <% if ( todays_events.length === 0 ) { %>
+          <h3>本日開催されるイベントはありません</h3>
+        <% }%>
+        <% todays_events.forEach((event) => { %>
+          <h3><a href="/event/<%= event.id %>"><%= event.title %></a></h3>
+        <% }) %>
+      </div>
+      <div class="page-header">
+        <h2>
+          <%= title %>
+          <a href="/event/new" class="btn btn-success" style="margin: 0px 0px 7px 20px">イベント作成</a>
+        </h2>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 30px"></th>
+            <th style="width: 150px">開催日</th>
+            <th>イベント名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for ( let i = events.length - 1; i >= 0; i-- ) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= moment( events[i].convened_at ).format('YYYY年 M月D日') %></td>
+              <td><a href="/event/<%= events[i].id %>"><%= events[i].title %></a></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
