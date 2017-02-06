@@ -24,7 +24,7 @@ class Event extends ORM {
   }
 }
 
-Event._table = {
+Event.prototype._table = {
   name: 'events',
   pk: 'id',
   schema: ['id', 'title', 'convened_at', 'created_by'],

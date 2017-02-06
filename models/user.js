@@ -3,7 +3,7 @@ const ORM = require('../lib/orm');
 class User extends ORM {
 }
 
-User._table = {
+User.prototype._table = {
   name: 'users',
   pk: 'id',
   schema: ['id', 'name', 'email', 'organization', 'uid', 'is_admin', 'notify'],
