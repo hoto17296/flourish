@@ -5,7 +5,7 @@
   "author": "hoto17296",
   "license": "MIT",
   "main": "app.js",
-  "repository": "hoto17296/shrike",
+  "repository": "hoto17296/flourish",
   "engines": {
     "node": ">= 6"
   },
