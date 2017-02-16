@@ -11,7 +11,10 @@ router.get('/', auth.required, (req, res) => {
       title: 'イベント',
       events: events,
     });
-  }).catch((err) => { throw err; });
+  }).catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;
