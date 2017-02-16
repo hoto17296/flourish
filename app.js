@@ -24,8 +24,9 @@ app.use( bodyParser.urlencoded({ extended: false }) );
 
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const sessionStore = new RedisStore({ client: redis });
 app.use(session({
-  store: new RedisStore({ client: redis }),
+  store: sessionStore,
   key: 'session_id',
   secret: process.env.SESSION_SECRET || 'flourish',
   resave: false,
@@ -37,7 +38,7 @@ io.use(require('passport.socketio').authorize({
   cookieParser: require('cookie-parser'),
   key: 'session_id',
   secret: process.env.SESSION_SECRET || 'flourish',
-  store: RedisStore,
+  store: sessionStore,
 }));
 
 app.set('view engine', 'ejs');
