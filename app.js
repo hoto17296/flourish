@@ -50,6 +50,7 @@ app.use( express.static('public') );
 app.use('/', require('./routes'));
 app.use('/', require('./routes/auth'));
 app.use('/event', require('./routes/event'));
+app.use('/user', require('./routes/user'));
 
 app.locals.sitename = process.env.SITENAME || 'flourish';
 app.locals.moment = require('moment');
