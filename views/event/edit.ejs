@@ -8,7 +8,7 @@
     <div class="container">
       <div class="page-header"><h2><%= title %></h2></div>
         <div style="width: 700px">
-        <form action="/event/<%= event.id %>/edit" method="post">
+        <form action="/event/<%= event.id %>?_method=patch" method="post">
           <div class="form-group">
             <label for="title">イベント名</label>
             <input type="text" class="form-control" name="title" placeholder="イベント名" autofocus value="<%= event.title %>" required>

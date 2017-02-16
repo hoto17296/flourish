@@ -3,15 +3,13 @@ const auth = require('../lib/auth');
 const Event = require('../models/event');
 const Topic = require('../models/topic');
 
-// イベント作成画面
 router.get('/new', auth.required, (req, res) => {
   res.render('event/new', {
     title: 'イベント作成',
   });
 });
 
-// イベント作成実行
-router.post('/new', auth.required, (req, res) => {
+router.post('/', auth.required, (req, res) => {
   const params = {
     title:       req.body.title,
     convened_at: req.body.convened,
@@ -38,7 +36,6 @@ router.post('/new', auth.required, (req, res) => {
     });
 });
 
-// イベントの編集画面
 router.get('/:id/edit', auth.required, (req, res) => {
   Event.find( req.params.id ).then((event) => {
     res.render('event/edit', {
@@ -51,8 +48,7 @@ router.get('/:id/edit', auth.required, (req, res) => {
   });
 });
 
-// イベント編集実行
-router.post('/:id/edit', auth.required, (req, res) => {
+router.patch('/:id', auth.required, (req, res) => {
   Event.find(req.params.id).then((event) => {
     event.title       = req.body.title;
     event.convened_at = req.body.convened;
@@ -91,7 +87,6 @@ router.post('/:id/edit', auth.required, (req, res) => {
   });
 });
 
-// イベント削除実行
 router.delete('/:id', auth.required, (req, res) => {
   Event.find( req.params.id )
     .then((event) => event.delete())
@@ -102,7 +97,6 @@ router.delete('/:id', auth.required, (req, res) => {
     });
 });
 
-// イベント詳細画面
 router.get('/:id', auth.required, (req, res) => {
   Event.find( req.params.id ).then((event) => {
     res.render('event/show', {
@@ -114,6 +108,5 @@ router.get('/:id', auth.required, (req, res) => {
     res.sendStatus(500);
   });
 });
-
 
 module.exports = router;
