@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head'); -%>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/topic.js" defer></script>
+  </head>
+  <body class='topic-detail' data-id='<%= topic.id %>'>
+    <script type="application/json" id="content-data"><%- entities.encode( JSON.stringify(topic) ) %></script>
+  </body>
+</html>

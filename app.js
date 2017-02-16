@@ -49,11 +49,15 @@ app.use( passport.session() );
 app.use( express.static('public') );
 app.use('/', require('./routes'));
 app.use('/', require('./routes/auth'));
-app.use('/event', require('./routes/event'));
 app.use('/user', require('./routes/user'));
+app.use('/event', require('./routes/event'));
+app.use('/topic', require('./routes/topic'));
 
 app.locals.sitename = process.env.SITENAME || 'flourish';
 app.locals.moment = require('moment');
+
+const Entities = require('html-entities').XmlEntities;
+app.locals.entities = new Entities();
 
 http.start = function(port) {
   port = port || process.env.PORT;
