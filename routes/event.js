@@ -91,6 +91,17 @@ router.post('/:id/edit', auth.required, (req, res) => {
   });
 });
 
+// イベント削除実行
+router.delete('/:id', auth.required, (req, res) => {
+  Event.find( req.params.id )
+    .then((event) => event.delete())
+    .then(() => res.redirect('/'))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
 // イベント詳細画面
 router.get('/:id', auth.required, (req, res) => {
   Event.find( req.params.id ).then((event) => {

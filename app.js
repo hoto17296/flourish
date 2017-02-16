@@ -13,6 +13,10 @@ app.set('db', db);
 const redis = require('./stores/redis');
 app.set('redis', redis);
 
+// override request method with POST having ?_method=DELETE
+const methodOverride = require('method-override');
+app.use( methodOverride('_method') );
+
 const bodyParser = require('body-parser');
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: false }) );
