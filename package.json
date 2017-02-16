@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "nf start",
-    "test": "mocha"
+    "test": "mocha",
+    "build": "webpack"
   },
   "dependencies": {
     "body-parser": "^1.16.0",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "foreman": "^2.0.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "webpack": "^2.2.1"
   }
 }
