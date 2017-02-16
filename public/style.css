@@ -1,0 +1,259 @@
+body {
+  padding: 0 0 4em;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #09c;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#login {
+  padding: 4em 0;
+  color: #fff;
+  background-color: #09c;
+  text-align: center;
+}
+
+#login h1 {
+  font-family: 'Codystar', cursive;
+  font-weight: bold;
+  font-size: 12rem;
+  line-height: 4em;
+}
+
+@media (max-width: 768px) {
+  #login h1 {
+    font-size: 4em;
+  }
+}
+
+.body-header {
+  color: #fff;
+  background-color: #09c;
+}
+
+.body-header .container {
+  position: relative;
+}
+
+.body-header a {
+  color: #fff;
+}
+
+.body-header ul {
+  margin: 0;
+  padding: 0;
+}
+
+.body-header li {
+  list-style-type: none;
+  display: inline-block;
+  height: 100%;
+}
+
+.body-header li a {
+  display: block;
+  padding: 0 1em;
+  line-height: 5em; /* TODO これ高さあってなくてダサい */
+}
+
+.body-header li a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.body-header h1 {
+  margin: 0;
+  padding: .5em 0;
+  font-family: 'Codystar', cursive;
+}
+
+.body-header .nav-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+.evaluation {
+  text-align: center;
+  font-size: 1.3em;
+  color: #fff;
+  margin: 1em 0;
+}
+
+.evaluation .evalStars {
+  margin-left: .5em;
+}
+
+.evaluation a {
+  color: orange;
+}
+
+.topic-detail {
+  padding-top: 0;
+  background-color: #09c;
+}
+
+.topic-detail .container-fluid {
+  max-width: 800px;
+
+}
+
+.topic-detail header {
+  position: relative;
+  font-size: 3em;
+  text-align: center;
+  padding: .5em 1em;
+  color: #fff;
+}
+
+.topic-detail header a {
+  color: #fff;
+}
+
+.topic-detail header .back,
+.topic-detail header .post {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 1em;
+  line-height: 2em;
+}
+
+.topic-detail header .back {
+  left: 0;
+}
+
+.topic-detail header .post {
+  right: 0;
+}
+
+.topic-detail .comment {
+  background-color: #fff;
+  border: none;
+}
+
+.topic-detail .comment-deleted .text {
+  color: #999;
+}
+
+.topic-detail .comment-question {
+  position: relative;
+  overflow: hidden;
+}
+
+.topic-detail .comment-question::before {
+  color: #ddd;
+  font-family: serif;
+  content: "？";
+  font-size: 10em;
+  position: absolute;
+  line-height: 1em;
+  right: -0.3em;
+  top: -0.15em;
+  z-index: 0;
+}
+
+.topic-detail .comment-question .panel-body {
+  position: relative;
+  z-index: 1;
+}
+
+.topic-detail .comment-form {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: .3em;
+}
+
+.topic-detail .comment-form textarea {
+  width: 100%;
+  height: 8em;
+  resize: vertical;
+  border-radius: .3em .3em 0 0;
+}
+
+.topic-detail .comment-form .buttons {
+  padding: 1em;
+}
+
+.topic-detail .comment-form .is_question {
+  margin: .5em 0 0 0;
+  vertical-align: top;
+}
+
+.topic-detail .comment-form input[type='checkbox'] {
+  margin-right: .5em;
+}
+
+
+.topic-detail .text {
+  font-size: 1.3em;
+  margin: .5em 0 1em;
+}
+
+.topic-detail .info {
+  color: #999;
+  float: right;
+}
+
+.topic-detail footer:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.topic-detail .replies {
+  border-left: .5em orange solid;
+  padding-left: 2em;
+  padding-bottom: 0;
+}
+
+.topic-detail .reply {
+  margin-bottom: 2em;
+}
+
+.topic-detail .reply-deleted .text {
+  color: #999;
+}
+
+.topic-detail .reply-form {
+  margin-top: 1em;
+}
+
+.topic-detail .reply-form textarea {
+  width: 100%;
+  height: 8em;
+  resize: vertical;
+}
+
+.topic-detail form button,
+.topic-detail form input[type='submit'] {
+  margin-right: 1em;
+}
+
+.topic-detail .empty {
+  color: #fff;
+  text-align: center;
+  font-size: 1.5em;
+  margin: 4em 0;
+}
+
+.topic-detail .reply-button {
+  margin-right: .5em;
+}
+
+.topic-detail .like-button:before {
+  margin: 0 .2em;
+}
+
+.topic-detail .like-button.liked {
+  color: orange;
+}
+
+.alert {
+  margin-top: 10px;
+}

@@ -1,4 +1,5 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -45,6 +46,7 @@ const passport = require('./lib/auth').initPassport();
 app.use( passport.initialize() );
 app.use( passport.session() );
 
+app.use( express.static('public') );
 app.use('/', require('./routes'));
 app.use('/', require('./routes/auth'));
 app.use('/event', require('./routes/event'));
