@@ -3,10 +3,13 @@ const path = require('path');
 module.exports = {
   context: path.resolve(__dirname, 'src/javascripts'),
   entry: {
-    topic: './topic/index.jsx',
+    topic: './topic',
   },
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: '[name].js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
 }
