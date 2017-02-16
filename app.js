@@ -11,9 +11,6 @@ app.set('io', io);
 const db = require('./stores/mysql');
 app.set('db', db);
 
-const redis = require('./stores/redis');
-app.set('redis', redis);
-
 // override request method with POST having ?_method=DELETE
 const methodOverride = require('method-override');
 app.use( methodOverride('_method') );
@@ -23,10 +20,9 @@ app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: false }) );
 
 const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
-const sessionStore = new RedisStore({ client: redis });
+const SessionStore = require('./lib/SessionStore')(session);
 app.use(session({
-  store: sessionStore,
+  store: SessionStore,
   key: 'session_id',
   secret: process.env.SESSION_SECRET || 'flourish',
   resave: false,
@@ -38,7 +34,7 @@ io.use(require('passport.socketio').authorize({
   cookieParser: require('cookie-parser'),
   key: 'session_id',
   secret: process.env.SESSION_SECRET || 'flourish',
-  store: sessionStore,
+  store: SessionStore,
 }));
 
 app.set('view engine', 'ejs');
