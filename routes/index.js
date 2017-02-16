@@ -3,7 +3,9 @@ const auth = require('../lib/auth');
 const Event = require('../models/event');
 
 router.get('/', auth.required, (req, res) => {
-  // TODO 初回ログインユーザはプロフィール編集画面へリダイレクト
+  if ( ! req.user.organization ) {
+    return res.redirect('/user/settings');
+  }
   Event.all().then((events) => {
     res.render('event/index', {
       title: 'イベント',
