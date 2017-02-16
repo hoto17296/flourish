@@ -1,4 +1,4 @@
-const ORM = require('../lib/orm');
+const ORM = require('../lib/ORM');
 const Topic = require('./topic');
 
 class Event extends ORM {

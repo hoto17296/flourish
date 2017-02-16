@@ -1,4 +1,4 @@
-const ORM = require('../lib/orm');
+const ORM = require('../lib/ORM');
 const redis = require('../stores/redis');
 
 class Topic extends ORM {
