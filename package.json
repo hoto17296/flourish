@@ -32,6 +32,9 @@
     "socket.io": "^1.7.2"
   },
   "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
     "foreman": "^2.0.0",
     "mocha": "^3.2.0",
     "webpack": "^2.2.1"
