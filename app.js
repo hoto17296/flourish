@@ -1,15 +1,5 @@
 const express = require('express');
 const app = express();
-const http = require('http').Server(app);
-
-const isProd = process.env.NODE_ENV === 'production';
-app.set('isProd', isProd);
-
-const io = require('socket.io')(http);
-app.set('io', io);
-
-const db = require('./stores/mysql');
-app.set('db', db);
 
 // override request method with POST having ?_method=DELETE
 const methodOverride = require('method-override');
@@ -28,13 +18,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-}));
-
-io.use(require('passport.socketio').authorize({
-  cookieParser: require('cookie-parser'),
-  key: 'session_id',
-  secret: process.env.SESSION_SECRET || 'flourish',
-  store: SessionStore,
 }));
 
 app.set('view engine', 'ejs');
@@ -56,13 +39,4 @@ app.locals.moment = require('moment');
 const Entities = require('html-entities').XmlEntities;
 app.locals.entities = new Entities();
 
-http.start = function(port) {
-  port = port || process.env.PORT;
-  http.listen(port, () => {
-    if ( isProd ) return;
-    const url = 'http://localhost:' + port;
-    console.log('flourish server starting on ' + url);
-  });
-}
-
-module.exports = http;
+module.exports = app;
