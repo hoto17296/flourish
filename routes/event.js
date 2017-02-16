@@ -109,4 +109,20 @@ router.get('/:id', auth.required, (req, res) => {
   });
 });
 
+router.get('/:id/evaluations', auth.required, (req, res) => {
+  Event.find( req.params.id ).then((event) => {
+    return Promise
+      .all( event.topics.map((topic) => topic.fetchEvaluations()) )
+      .then(() => Promise.resolve(event));
+  }).then((event) => {
+    res.render('event/evaluations', {
+      title: '集計結果',
+      event: event,
+    });
+  }).catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  });
+});
+
 module.exports = router;

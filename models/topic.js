@@ -1,6 +1,31 @@
 const ORM = require('../lib/orm');
+const redis = require('../stores/redis');
 
 class Topic extends ORM {
+  fetchEvaluations() {
+    return new Promise((resolve, reject) => {
+      redis.hgetall('evaluation:' + this.id, (err, rawData) => {
+        if (err) return reject(err);
+        rawData = rawData || {};
+        const data = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+        var length = 0;
+        var total = 0;
+        for ( let i in rawData ) {
+          let val = ~~rawData[i] + 1; // 最小値を 1 にするために 1 増やす
+          data[ val - 1 ]++;
+          length++;
+          total += val;
+        }
+        this.evaluations = {
+          raw: rawData,
+          data: data,
+          length: length,
+          average: length !== 0 ? total / length : null,
+        };
+        resolve(this);
+      });
+    });
+  }
 }
 
 Topic.prototype._table = {

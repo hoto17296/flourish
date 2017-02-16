@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head'); -%>
+
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      function drawChart(rows, target, options) {
+        google.setOnLoadCallback(function() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', '評価');
+          data.addColumn('number', '回答数');
+          data.addRows(rows);
+
+          var chart = new google.visualization.ColumnChart(target);
+          chart.draw(data, options);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <%- include('../partial/body_header'); -%>
+
+    <div class="container">
+      <% event.topics.forEach((topic) => { %>
+        <% const ev = topic.evaluations %>
+        <div>
+          <h2>
+            <a href="/topic/<%- topic.id %>" target="_blank">
+              <%- topic.presentator %> / <%- topic.title %>
+            </a>
+          </h2>
+          <p>
+            回答数：<%- ev.length %>
+            平均：<%- ev.average || '-' %>
+          </p>
+          <div id="chart_<%- topic.id %>"></div>
+          <script type="text/javascript">
+            drawChart(
+              <%- JSON.stringify( ev.data.map((v, i) => [i+1, v]) ) %>,
+              document.getElementById('chart_<%- topic.id %>'),
+              { width: 400 }
+            );
+          </script>
+        </div>
+      <% }); %>
+    </div>
+
+  </body>
+</html>
