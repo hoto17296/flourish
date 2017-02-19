@@ -5,7 +5,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/topic.js" defer></script>
   </head>
-  <body class='topic-detail' data-id='<%= topic.id %>'>
+  <body class='topic-detail' data-id='<%= topic.id %>' data-uid='<%= user.id %>'>
     <script type="application/json" id="content-data"><%- entities.encode( JSON.stringify(topic) ) %></script>
   </body>
 </html>
