@@ -4,6 +4,8 @@ const Topic = require('../models/topic');
 
 router.get('/:id', auth.required, (req, res) => {
   Topic.find( req.params.id ).then((topic) => {
+    return topic.fetchComments().then(() => Promise.resolve(topic));
+  }).then((topic) => {
     res.render('topic/show', {
       title: topic.title,
       topic: topic,

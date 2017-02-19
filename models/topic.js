@@ -1,7 +1,15 @@
 const ORM = require('../lib/ORM');
 const redis = require('../stores/redis');
+const Comment = require('./comment');
 
 class Topic extends ORM {
+  fetchComments() {
+    return Comment.findAllBy('topic_id', this.id).then((comments) => {
+      this.comments = comments;
+      return Promise.resolve(this);
+    });
+  }
+
   fetchEvaluations() {
     return new Promise((resolve, reject) => {
       redis.hgetall('evaluation:' + this.id, (err, rawData) => {
