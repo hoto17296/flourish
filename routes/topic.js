@@ -3,11 +3,7 @@ const auth = require('../lib/auth');
 const Topic = require('../models/Topic');
 
 router.get('/:id', auth.required, (req, res) => {
-  Topic.find( req.params.id ).then((topic) => {
-    return topic.fetchComments()
-      .then(() => topic.fetchEvaluations())
-      .then(() => Promise.resolve(topic));
-  }).then((topic) => {
+  Topic.findWithDetails( req.params.id ).then((topic) => {
     res.render('topic/show', {
       title: topic.title,
       topic: topic,

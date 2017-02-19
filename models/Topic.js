@@ -3,6 +3,14 @@ const redis = require('../stores/redis');
 const Comment = require('./Comment');
 
 class Topic extends ORM {
+  static findWithDetails(id) {
+    return this.find(id).then((topic) => {
+      return topic.fetchComments()
+        .then(() => topic.fetchEvaluations())
+        .then(() => Promise.resolve(topic));
+    });
+  }
+
   fetchComments() {
     return Comment.findAllBy('topic_id', this.id).then((comments) => {
       this.comments = comments;
