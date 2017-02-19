@@ -12,7 +12,9 @@
   "scripts": {
     "start": "nf start",
     "test": "mocha",
-    "build": "webpack"
+    "postinstall": "npm run build",
+    "build": "webpack -p",
+    "watch": "webpack -d --watch"
   },
   "dependencies": {
     "body-parser": "^1.16.0",
@@ -35,7 +37,6 @@
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-transform-react-jsx": "^6.23.0",
-    "compression-webpack-plugin": "^0.3.2",
     "flux": "^2.0.3",
     "foreman": "^2.0.0",
     "html-class-manager": "^0.1.1",
@@ -44,7 +45,6 @@
     "react": "^0.13.3",
     "react-autolink": "^0.2.1",
     "react-nl2br": "^0.2.0",
-    "uglifyjs-webpack-plugin": "^0.1.5",
     "webpack": "^2.2.1"
   }
 }

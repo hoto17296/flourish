@@ -1,6 +1,4 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src/javascripts'),
@@ -23,8 +21,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new UglifyJSPlugin(),
-    new CompressionPlugin(),
-  ],
 }
