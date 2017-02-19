@@ -1,5 +1,5 @@
 const ORM = require('../lib/ORM');
-const Topic = require('./topic');
+const Topic = require('./Topic');
 
 class Event extends ORM {
   static findBy(key, val) {

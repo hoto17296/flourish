@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const auth = require('../lib/auth');
-const User = require('../models/user');
+const User = require('../models/User');
 
 router.get('/settings', auth.required, (req, res) => {
   User.find( req.user.id ).then((user) => {

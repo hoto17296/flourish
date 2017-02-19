@@ -1,6 +1,6 @@
 const ORM = require('../lib/ORM');
 const redis = require('../stores/redis');
-const Comment = require('./comment');
+const Comment = require('./Comment');
 
 class Topic extends ORM {
   fetchComments() {

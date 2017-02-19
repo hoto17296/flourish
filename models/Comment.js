@@ -1,7 +1,7 @@
 const ORM = require('../lib/ORM');
 const mysql = require('../stores/mysql');
 const redis = require('../stores/redis');
-const Reply = require('./reply');
+const Reply = require('./Reply');
 
 class Comment extends ORM {
   static findAllBy(key, val) {

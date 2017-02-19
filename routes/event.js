@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../lib/auth');
-const Event = require('../models/event');
-const Topic = require('../models/topic');
+const Event = require('../models/Event');
+const Topic = require('../models/Topic');
 
 router.get('/new', auth.required, (req, res) => {
   res.render('event/new', {

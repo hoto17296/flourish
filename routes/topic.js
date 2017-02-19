@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const auth = require('../lib/auth');
-const Topic = require('../models/topic');
+const Topic = require('../models/Topic');
 
 router.get('/:id', auth.required, (req, res) => {
   Topic.find( req.params.id ).then((topic) => {
