@@ -4,7 +4,7 @@
   "description": "",
   "author": "hoto17296",
   "license": "MIT",
-  "main": "server.js",
+  "main": "lib/server.js",
   "repository": "hoto17296/flourish",
   "engines": {
     "node": ">= 6"
