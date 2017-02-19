@@ -11,6 +11,17 @@ class Reply extends ORM {
       });
     });
   }
+
+  toggleLike(userId) {
+    return new Promise((resolve, reject) => {
+      const key = 'like:reply:' + this.id;
+      redis.sismember(key, userId, (err, isMember) => {
+        isMember
+          ? redis.srem(key, userId, (err) => err ? reject(err) : resolve())
+          : redis.sadd(key, userId, (err) => err ? reject(err) : resolve());
+      });
+    })
+  }
 }
 
 Reply.prototype._table = {

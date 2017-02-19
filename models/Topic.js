@@ -42,6 +42,22 @@ class Topic extends ORM {
       });
     });
   }
+
+  evaluate(value, userId) {
+    return new Promise((resolve, reject) => {
+      const key = 'evaluation:' + this.id;
+      redis.hset(key, userId, ~~value, (err, data) => err ? reject(err) : resolve(data));
+    })
+  }
+
+  comment(text, userId, isQuestion) {
+    return Comment.create({
+      topic_id: this.id,
+      text: text,
+      created_by: userId,
+      is_question: !! isQuestion,
+    });
+  }
 }
 
 Topic.prototype._table = {
