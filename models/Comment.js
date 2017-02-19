@@ -30,6 +30,7 @@ class Comment extends ORM {
     // fetch all replies without N+1 query.
     .then((comments) => {
       return new Promise((resolve, reject) => {
+        if ( comments.length === 0 ) return resolve([]);
         const ids = comments.map((comment) => comment.id);
         const sql = 'SELECT r.*, u.name AS created_by_name, u.organization AS created_by_organization'
           + ' FROM ?? AS r JOIN users AS u ON u.id = r.created_by'
